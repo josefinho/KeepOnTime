@@ -1,13 +1,15 @@
 const tabelas = require('./schema')
 const Tarefa = tabelas.Tarefa
 
-function criarTarefa(tarefa) {
+function inserirTarefa(titulo, descricao, prazo) {
 
-    const tarefa = Tarefa.create({
-        titulo: "Um titulo",
+    const novaTarefa = Tarefa.create({
+        titulo: titulo,
+        descricao: descricao,
+        prazo: prazo,
     })
 
-    let id = tarefa.id;
+    let id = novaTarefa.id;
 
     console.log(`O id é: ${id}`)
     return id;
@@ -17,4 +19,9 @@ function recuperListaDeTarefas() {
     let tarefas = Tarefa.findAll()
 
     return tarefas;
+}
+
+module.exports = {
+    recuperListaDeTarefas,
+    inserirTarefa,
 }
