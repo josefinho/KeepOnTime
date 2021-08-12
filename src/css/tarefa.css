@@ -1,0 +1,8 @@
+body{
+    background-color:#eeeee1;
+}
+
+.titulo{
+    display: flex;
+    margin-left: 20%;
+}
