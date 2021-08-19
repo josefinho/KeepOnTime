@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { lista_tarefas } from './mockdata';
-import { Tarefa } from './modelos';
+import { Tarefa } from 'src/entity/Tarefa';
+import { Connection } from 'typeorm';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TarefaService {
 
-  constructor() { }
+  constructor(private connection: Connection) { }
 
   getTodasTarefas(): Observable<Tarefa[]> {
-    const tarefas = of(lista_tarefas)
-    return tarefas;
   }
 
   getTarefaPelaId(id: string): Observable<Tarefa> {
-      const tarefa = lista_tarefas.find(tarefa => tarefa.id === id)!;
-      return of(tarefa);
   }
 }

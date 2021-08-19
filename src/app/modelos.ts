@@ -3,10 +3,11 @@ export interface Tarefa {
     id: string;
     titulo: string,
     descricao: string,
-    prazo: Date;
-    cor_rgb: string;
+    prazo?: Date;
+    cor_rgb?: string;
     data_criacao: Date;
-    data_conclusao: Date;
+    data_conclusao?: Date;
+    status: Boolean;
 }
 
 export interface Caderno {

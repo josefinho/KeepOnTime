@@ -8,6 +8,8 @@ import { ListaTarefasComponent } from './lista-tarefas/lista-tarefas.component';
 import { ListaCadernosComponent } from './lista-cadernos/lista-cadernos.component';
 import { ListaBarraFerramentasComponent } from './lista-barra-ferramentas/lista-barra-ferramentas.component';
 import { CadernoComponent } from './caderno/caderno.component';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { TarefaEditorComponent } from './tarefa-editor/tarefa-editor.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +18,13 @@ import { CadernoComponent } from './caderno/caderno.component';
     ListaTarefasComponent,
     ListaCadernosComponent,
     ListaBarraFerramentasComponent,
-    CadernoComponent
+    CadernoComponent,
+    TarefaEditorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
