@@ -9,22 +9,43 @@
 </head>
 
 <body>
-
     <div id="main-bg" class="container my-3">
-        <header>
+        <!--MENU NAVBAR-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark w-100 rounded">
+            <a class="navbar-brand text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Nova Tarefa</a>
 
-            <h1 id="title" class="display-2">KeepOnTime</h1>
-
-        </header>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#editar" >Editar Tarefa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">test</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">test</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <hr>
+        <!-- SECAO DE TAREFAS-->
         <div class="d-flex">
-            <div id="table-div" class="bg-light w-75  mx-2">
+            <div id="table-div" class="bg-light w-100">
                 <table class="table table-striped table-hover">
 
                     <tr class="table-dark">
                         <th>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" id="globalcheck" class="form-check-input" onclick="selectAllChecks()">
+
                                 <label class="form-check-label" for="exampleCheck1"></label>
                             </div>
                         </th>
@@ -33,25 +54,14 @@
                         <th>PRAZO</th>
                         <th>HORÁRIO</th>
                         <th>DESCRIÇÃO</th>
+                        <th>STATUS</th>
                     </tr>
 
                     <%- include('partials/tarefa.ejs') %>
                 </table>
 
             </div>
-            <div id="menu-div" class="bg-light flex-row w-25 ms-2">
 
-                <div id="btn-set" class="btn-group-vertical gap-2 w-75 mt-4">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Nova Tarefa</button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#editar">Editar Tarefa</button>
-                    <button type="button" class="btn btn-secondary">Excluir Tafera</button>
-                    <button type="button" class="btn btn-success">Novo caderno</button>
-
-                </div>
-
-            </div>
         </div>
 
         <!-- Modal Nova Tarefa -->
@@ -105,41 +115,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="/">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Titulo</span>
-                                <input name="titulo" type="text" class="form-control" placeholder="Título da tarefa"
-                                    aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Prazo</span>
-                                <input name="prazo" type="date" class="form-control" aria-label="Username"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Horário</span>
-                                <input name="hora" type="time" class="form-control" aria-label="Username"
-                                    aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text">Descrição</span>
-                                <textarea name="descricao" class="form-control" aria-label="With textarea"></textarea>
-                            </div>
-                            <hr>
                             <%- include('partials/edit_tarefas.ejs') %>
-                            fafsdfdsa
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
-                                <button type="submit" class="btn btn-primary">Salvar</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Sair</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
+                       
                     </div>
-    
+
                 </div>
             </div>
-            
+
         </div>
-        
+
 
     </div>
     <script src="js/bootstrap.js"></script>

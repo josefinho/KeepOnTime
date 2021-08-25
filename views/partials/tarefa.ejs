@@ -1,7 +1,7 @@
 <% tarefas.forEach((tarefa)=> { %>
     <tr>
         <td>
-            <div class="mb-3 form-check">
+            <div class="mb-1 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1"></label>
             </div>
@@ -18,6 +18,15 @@
         </td>
         <td>
             <%= tarefa.descricao %>
+        </td>
+        <td>
+            <div class="row">
+                <div class="col offset-3">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1"></label>    
+                </div>
+            </div>
+            
         </td>
     </tr>
     <% }) %>
