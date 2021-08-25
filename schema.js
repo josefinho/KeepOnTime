@@ -1,7 +1,11 @@
 const Sequelize = require('sequelize');
-const db = require('./create_db');
 
-const Tarefa = db.define('tarefa', {
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './tarefas.sqlite',
+});
+
+const Tarefa = sequelize.define('tarefa', {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -62,5 +66,6 @@ const Prioridade = db.define('prioridade', {
 module.exports = {
 //    Prioridade,
 //    Caderno,
+    sequelize,
     Tarefa,
 };

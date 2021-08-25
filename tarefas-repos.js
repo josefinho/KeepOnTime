@@ -1,5 +1,5 @@
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./tarefas.sqlite3');
+const { sequelize, Tarefa } = require('./schema')
+
 
 function abrirConexao() {}
 function fecharConexao() {}
@@ -7,11 +7,10 @@ function fecharConexao() {}
 // Formato da tarefa:
 
 /**
- * Salva uma tarefa no banco de dados.
+ * Salva uma tarefa no banco de dados, retornando a id da tarefa salva
  * 
  * Exemplo de objeto de tarefa:
- *
- * tarefa = {
+ * {
  *   id: 1,
  *   titulo: "teste",
  *   prazo: "1999-12-12",
@@ -19,16 +18,30 @@ function fecharConexao() {}
  *   descricao: "testte"
  * };
  */
-function criarTarefa(tarefa) {
-  
+async function criarTarefa(tarefa) {
+    const novaTarefa = await Tarefa.create({
+        id: tarefa.id,
+        titulo: tarefa.titulo,
+        prazo: tarefa.prazo,
+        hora: tarefa.hora,
+        descricao: tarefa.descricao,
+    });
+    return novaTarefa.id;
 }
 
 
-function alterarTarefa(tarefa) {
-  
+async function pegarListaTarefas(caderno_id) {
+    if (caderno_id)
+        return await Tarefa.findAll({ where: {caderno_id: caderno_id}})
+    else
+        return await Tarefa.findAll();
 }
 
 function removerTarefa(tarefa) {
 
 }
 
+module.exports = {
+    criarTarefa,
+    pegarListaTarefas,
+}
