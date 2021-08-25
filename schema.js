@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
     storage: './tarefas.sqlite',
 });
 
-const Tarefa = sequelize.define('tarefa', {
+const ModeloTarefa = {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -18,16 +18,15 @@ const Tarefa = sequelize.define('tarefa', {
     },
     descricao: { type: Sequelize.TEXT },
     prazo: { type: Sequelize.DATE },
-//    data_criacao: { type: Sequelize.DATE, default: Sequelize.NOW() },
-//    data_conclusao: { type: Sequelize.DATE },
-//    cor_rgb: { type: Sequelize.STRING },
-//    repete_em_horas: { type: Sequelize.INTEGER },
-//    repete_em_dias: { type: Sequelize.INTEGER },
+    status: { type: Sequelize.BOOLEAN },
+    //    cor_rgb: { type: Sequelize.STRING },
+    //    repete_em_horas: { type: Sequelize.INTEGER },
+    //    repete_em_dias: { type: Sequelize.INTEGER },
 
-}, { underscored: true })
+};
+const Tarefa = sequelize.define('tarefa', ModeloTarefa, { underscored: true })
 
-/*
-const Caderno = db.define('caderno', {
+const ModeloCaderno = {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -42,9 +41,10 @@ const Caderno = db.define('caderno', {
         type: Sequelize.TEXT,
         allowNull: true,
     },
-}, { underscored: true })
+};
+const Caderno = sequelize.define('caderno', ModeloCaderno, { underscored: true });
 
-const Prioridade = db.define('prioridade', {
+const ModeloPrioridade = {
     id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -55,17 +55,28 @@ const Prioridade = db.define('prioridade', {
         type: Sequelize.TEXT,
         allowNull: true,
     },
-}, { underscored: true })
-*/
+};
+const Prioridade = sequelize.define('prioridade', ModeloPrioridade, { underscored: true })
 
-//Tarefa.belongsTo(Caderno)
-//Tarefa.belongsTo(Prioridade)
-//Tarefa.belongsTo(Tarefa, { as: 'tarefa_pai' })
-//Caderno.belongsTo(Caderno, { as: 'caderno_pai' })
+async function syncDatabase() {
+    await Tarefa.sync()
+    await Caderno.sync()
+    await Prioridade.sync()
+
+    Tarefa.belongsTo(Caderno)
+    Tarefa.belongsTo(Prioridade)
+    Tarefa.belongsTo(Tarefa, { as: 'tarefa_pai' })
+    Caderno.belongsTo(Caderno, { as: 'caderno_pai' })
+
+}
 
 module.exports = {
-//    Prioridade,
-//    Caderno,
-    sequelize,
+    ModeloTarefa,
+    ModeloCaderno,
+    ModeloPrioridade,
     Tarefa,
+    Caderno,
+    Prioridade,
+    sequelize,
+    syncDatabase,
 };

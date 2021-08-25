@@ -15,12 +15,10 @@ async function executarTestes() {
         hora: "15:23",
         descricao: "testte"
     };
-    
-    //let tarefa_id = criarTarefa(tarefa).then(tarefa => tarefa_id = tarefa);
-    console.log("=======================================")
+
     let listaTarefas = await pegarListaTarefas();
     listaTarefas.forEach(element => {
-        console.log(element.id)
+        console.log(element.id + ": " + element.titulo);
     });
 }
 
