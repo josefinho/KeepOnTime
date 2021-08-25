@@ -37,11 +37,13 @@ async function pegarListaTarefas(caderno_id) {
         return await Tarefa.findAll();
 }
 
-function removerTarefa(tarefa) {
+async function concluirTarefa(tarefa_id) {
 
 }
+
 
 module.exports = {
     criarTarefa,
     pegarListaTarefas,
+
 }
