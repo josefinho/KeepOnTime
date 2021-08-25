@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <!-- Modal -->
+        <!-- Modal Nova Tarefa -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -95,6 +95,50 @@
             </div>
         </div>
 
+        <!-- Modal Editar Tarefa -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar tarefa</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="/">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Titulo</span>
+                                <input name="titulo" type="text" class="form-control" placeholder="Título da tarefa"
+                                    aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Prazo</span>
+                                <input name="prazo" type="date" class="form-control" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Horário</span>
+                                <input name="hora" type="time" class="form-control" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">Descrição</span>
+                                <textarea name="descricao" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <hr>
+                            <%- include('partials/edit_tarefas.ejs') %>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+    
+                </div>
+            </div>
+            
+        </div>
+        
 
     </div>
     <script src="js/bootstrap.js"></script>
