@@ -6,7 +6,6 @@
     <title>KeepOnTime</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script  src="/public/js/index.js"></SCRipt>
 </head>
 
 <body>
@@ -17,13 +16,40 @@
 
         </header>
         <hr>
+        <!--MENU NAVBAR-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">Nova Tarefa</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#editar" >Editar Tarefa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- SECAO DE TAREFAS-->
         <div class="d-flex">
-            <div id="table-div" class="bg-light w-75  mx-2">
+            <div id="table-div" class="bg-light w-75">
                 <table class="table table-striped table-hover">
 
                     <tr class="table-dark">
                         <th>
-                            <div class="mb-3 form-check">
+                            <div class="mb form-check">
                                 <input type="checkbox" class="form-check-input" id="CHECKGLOBAL">
                                 <label class="form-check-label" for="exampleCheck1"></label>
                             </div>
@@ -33,25 +59,14 @@
                         <th>PRAZO</th>
                         <th>HORÁRIO</th>
                         <th>DESCRIÇÃO</th>
+                        <th>STATUS</th>
                     </tr>
 
                     <%- include('partials/tarefa.ejs') %>
                 </table>
 
             </div>
-            <div id="menu-div" class="bg-light flex-row w-25 ms-2">
 
-                <div id="btn-set" class="btn-group-vertical gap-2 w-75 mt-4">
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">Nova Tarefa</button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-                    data-bs-target="#editar">Editar Tarefa</button>
-                    <button type="button" class="btn btn-secondary">Excluir Tafera</button>
-                    <button type="button" class="btn btn-success">Novo caderno</button>
-
-                </div>
-
-            </div>
         </div>
 
         <!-- Modal Nova Tarefa -->
@@ -127,18 +142,19 @@
                             </div>
                             <hr>
                             <%- include('partials/edit_tarefas.ejs') %>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
-                                <button type="submit" class="btn btn-primary">Salvar</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Sair</button>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </div>
                         </form>
                     </div>
-    
+
                 </div>
             </div>
-            
+
         </div>
-        
+
 
     </div>
     <script src="js/bootstrap.js"></script>
