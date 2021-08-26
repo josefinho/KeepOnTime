@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#editar" >Editar Tarefa</a>
+                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#editar" onclick="checkCheckBox()">Editar Tarefa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">test</a>
+                        <a class="nav-link text-white" href="#">Excluir</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">test</a>
+                        <a class="nav-link text-white" href="#">Concluir</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">test</a>
@@ -53,8 +53,6 @@
                         <th>TÍTULO</th>
                         <th>PRAZO</th>
                         <th>HORÁRIO</th>
-                        <th>DESCRIÇÃO</th>
-                        <th>STATUS</th>
                     </tr>
 
                     <%- include('partials/tarefa.ejs') %>
