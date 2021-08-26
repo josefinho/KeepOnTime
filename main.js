@@ -7,6 +7,7 @@ const { syncDatabase } = require('./schema')
 
 const port = 3000
 
+syncDatabase();
 
 
 app.set('view engine', 'ejs');

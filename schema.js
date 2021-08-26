@@ -62,11 +62,11 @@ async function syncDatabase() {
     await Tarefa.sync()
     await Caderno.sync()
     await Prioridade.sync()
-
-    Tarefa.belongsTo(Caderno)
-    Tarefa.belongsTo(Prioridade)
-    Tarefa.belongsTo(Tarefa, { as: 'tarefa_pai' })
-    Caderno.belongsTo(Caderno, { as: 'caderno_pai' })
+//
+//    Tarefa.belongsTo(Caderno)
+//    Tarefa.belongsTo(Prioridade)
+//    Tarefa.belongsTo(Tarefa, { as: 'tarefa_pai' })
+//    Caderno.belongsTo(Caderno, { as: 'caderno_pai' })
 
 }
 
