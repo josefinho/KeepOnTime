@@ -1,5 +1,5 @@
 <% tarefas.forEach((tarefa)=> { %>
-    <tr>
+    <tr data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         <td>
             <div class="mb-1 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -16,17 +16,15 @@
         <td>
             <%= tarefa.hora %>
         </td>
-        <td>
+       
+    </tr>
+    <tr class="collapse" id="collapseExample">
+        <td colspan="5">
             <%= tarefa.descricao %>
-        </td>
-        <td>
-            <div class="row">
-                <div class="col offset-3">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1"></label>    
-                </div>
-            </div>
-            
         </td>
     </tr>
     <% }) %>
+
+
+
+    
