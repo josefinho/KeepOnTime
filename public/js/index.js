@@ -29,3 +29,16 @@ function selectAllChecks(){
             checkboxes[j].checked = true;
         }
 }
+
+// Usado no botão de editar tarefas para verificar as tarefas marcadas.
+function checkCheckBox() { 
+    let checkboxes = getAllCheckInputs();
+    let checkedCheckboxes = [];
+
+    document.getElementById("globalcheck").checked = false;
+
+    for(let i = 0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked === true)
+            checkedCheckboxes.push(checkboxes[i]);
+    }
+}
