@@ -1,18 +1,24 @@
 const express = require('express')
 const app = express()
 const fs = require('fs')
+const { pegarListaTarefas } = require('./tarefas-repos')
+const { syncDatabase } = require('./schema')
+
 
 const port = 3000
 
-const tarefas = 
-  JSON.parse(fs.readFileSync('tarefas.json'))
+
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-
+app.get('/', async (req, res) => {
+  tarefas = []
+  listaTarefas = await pegarListaTarefas()
+  listaTarefas.forEach(element => {
+    tarefas.push(element);
+  });
   res.render('index', {
     tarefas: tarefas
   })
