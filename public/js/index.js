@@ -1,3 +1,5 @@
+// Retorna um vetor com os checkboxes da página, incluindo
+// o checkbox global que marca/desmarca todos os outros.
 function getAllCheckInputs() {
     let inputs = [];
     let checkboxes = [];
@@ -11,6 +13,8 @@ function getAllCheckInputs() {
     return checkboxes;
 }
 
+// Ao clicar na checkbox global, essa função faz a lógica de 
+// marcar/desmarcar as checkboxes.
 function selectAllChecks(){
     let checkboxes = getAllCheckInputs();
 
@@ -31,6 +35,7 @@ function selectAllChecks(){
 }
 
 // Usado no botão de editar tarefas para verificar as tarefas marcadas.
+// Assim dá pra saber quais tarefas alocar no modal.
 function checkCheckBox() { 
     let checkboxes = getAllCheckInputs();
     let checkedCheckboxes = [];
