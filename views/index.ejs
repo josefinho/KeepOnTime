@@ -21,13 +21,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" data-bs-target="#editar" onclick="checkCheckBox()">Editar Tarefa</a>
+                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" id="edit" data-bs-target="#editar">Editar Tarefa</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">Excluir</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Concluir</a>
+                        <a class="nav-link text-white" href="#" onclick="createEditForm()">Concluir</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#">test</a>
@@ -39,7 +39,7 @@
         <!-- SECAO DE TAREFAS-->
         <div class="d-flex">
             <div id="table-div" class="bg-light w-100">
-                <table class="table table-striped table-hover">
+                <table id="teste" class="table table-striped table-hover">
 
                     <tr class="table-dark">
                         <th>
@@ -105,7 +105,7 @@
 
         <!-- Modal Editar Tarefa -->
 
-        <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="editarLabel" aria-hidden="true">
+        <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="editarLabel" aria-hidden="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -113,13 +113,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            <%- include('partials/edit_tarefas.ejs') %>
+                            <div id="modalEditMessage">
+                                Nenhuma tarefa selecionada.
+                            </div>
+                            <div id="modalEditContent">
+                            
+                            </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Sair</button>
                                     <button type="submit" class="btn btn-primary">Salvar</button>
                                 </div>
-                       
                     </div>
 
                 </div>
