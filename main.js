@@ -27,9 +27,17 @@ app.get('/', async (req, res) => {
 })
 
 app.post('/', (req, res) => {
-  console.log(criarTarefa(req.body))
+  criarTarefa(req.body)
   res.redirect('/')
 })
+
+app.post('/edit', (req, res) => {
+  console.log('DADOS ATUALIZADOS', req.body)
+  let tarefa;
+  
+  editarTarefa(id_tarefa, tarefaEditada)
+  res.redirect('/');
+});
 
 app.listen(port, () => {
   console.log(`Rodando em http://localhost:${port}`)

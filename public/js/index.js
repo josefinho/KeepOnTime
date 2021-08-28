@@ -59,10 +59,8 @@ function getAllCheckeds() {
  * de tarefas.
  */
 function createEditForm(data) {
-    let form = document.createElement('form');
-    form.method = "POST";
-    form.action = "/";
-    
+    let divForm = document.createElement('div');
+
     console.log(data);
     let div = document.createElement('div');
     div.setAttribute('class','input-group mb-3');
@@ -81,8 +79,8 @@ function createEditForm(data) {
     input["aria-describedby"] = 'basic-addon1';
     input.value = data[0];
 
-    document.getElementById('modalEditContent').appendChild(form);
-    form.appendChild(div);
+    document.getElementById('modalEditContent').appendChild(divForm);
+    divForm.appendChild(div);
     div.appendChild(span);
     div.appendChild(input);
 
@@ -91,14 +89,14 @@ function createEditForm(data) {
     divPrazo.lastChild.name = 'prazo'
     divPrazo.lastChild.type = 'date'
     divPrazo.lastChild.value = data[1];
-    form.appendChild(divPrazo);
+    divForm.appendChild(divPrazo);
 
     let divHora = div.cloneNode(true);
     divHora.firstChild.innerHTML = 'Horário'
     divHora.lastChild.type = 'time'
     divHora.lastChild.name = 'hora'
     divHora.lastChild.value = data[2];
-    form.appendChild(divHora);
+    divForm.appendChild(divHora);
 
     let divText = document.createElement('div');
     divText.setAttribute('class', 'input-group')
@@ -117,15 +115,19 @@ function createEditForm(data) {
     divText.lastChild.style.display = 'none';
     divText.lastChild.value = data[3];
 
-    form.appendChild(divText);
-    form.appendChild(document.createElement('hr'))
+    divForm.appendChild(divText);
+    divForm.appendChild(document.createElement('hr'))
 }
 
 function removeTextSpacing(str) {
     let newStr;
 
-    newStr = str.slice(13, str.length - 10)
-    return newStr;
+    if(str.indexOf('\n  ') === 0) {
+        newStr = str.slice(13, str.length - 10)
+        return newStr;
+    }
+
+    return str;
 }
 
 /**
@@ -185,7 +187,6 @@ document.getElementById("edit").onclick = function() {
         }
 
         console.log(TrData);
-
         for(let i = 0; i < TrData.length; i++) {
             createEditForm(TrData[i]);
         }
@@ -215,4 +216,9 @@ function expand_subtext(id){
             document.getElementById(id).setAttribute("class" , "collapse")
         }
 
+}
+
+function submitForm() {
+    let form = document.getElementById('modalEditContent');
+    form.submit();
 }

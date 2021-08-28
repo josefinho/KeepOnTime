@@ -49,7 +49,7 @@
                                 <label class="form-check-label" for="exampleCheck1"></label>
                             </div>
                         </th>
-                        <th>SIGLA</th>
+                        <th class="d-none">SIGLA</th>
                         <th>TÍTULO</th>
                         <th>PRAZO</th>
                         <th>HORÁRIO</th>
@@ -105,7 +105,7 @@
 
         <!-- Modal Editar Tarefa -->
 
-        <div class="modal fade" id="editar" tabindex="-1" aria-labelledby="editarLabel" aria-hidden="false" onclick="removeEditContent()">
+        <div class="modal fade" id="editar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -116,13 +116,13 @@
                             <div id="modalEditMessage">
                                 Nenhuma tarefa selecionada.
                             </div>
-                            <div id="modalEditContent">
+                            <form id="modalEditContent" method="POST" action="/edit">
                             
-                            </div>
+                            </form>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Sair</button>
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                    <button type="submit" class="btn btn-primary" onclick="submitForm()">Salvar</button>
                                 </div>
                     </div>
 
