@@ -33,9 +33,7 @@ app.post('/', (req, res) => {
 
 app.post('/edit', (req, res) => {
   console.log('DADOS ATUALIZADOS', req.body)
-  let tarefa;
-  
-  editarTarefa(id_tarefa, tarefaEditada)
+
   res.redirect('/');
 });
 
