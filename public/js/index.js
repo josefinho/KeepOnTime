@@ -58,11 +58,12 @@ function getAllCheckeds() {
  * Cria um <form> contendo um formulário para edição
  * de tarefas.
  */
-function createEditForm() {
+function createEditForm(data) {
     let form = document.createElement('form');
     form.method = "POST";
     form.action = "/";
     
+    console.log(data);
     let div = document.createElement('div');
     div.setAttribute('class','input-group mb-3');
 
@@ -78,6 +79,7 @@ function createEditForm() {
     input.placeholder = 'Título da tarefa';
     input["aria-label"] = 'Username';
     input["aria-describedby"] = 'basic-addon1';
+    input.value = data[0];
 
     document.getElementById('modalEditContent').appendChild(form);
     form.appendChild(div);
@@ -88,23 +90,42 @@ function createEditForm() {
     divPrazo.firstChild.innerHTML = 'Prazo'
     divPrazo.lastChild.name = 'prazo'
     divPrazo.lastChild.type = 'date'
+    divPrazo.lastChild.value = data[1];
     form.appendChild(divPrazo);
 
     let divHora = div.cloneNode(true);
     divHora.firstChild.innerHTML = 'Horário'
     divHora.lastChild.type = 'time'
     divHora.lastChild.name = 'hora'
+    divHora.lastChild.value = data[2];
     form.appendChild(divHora);
 
     let divText = document.createElement('div');
     divText.setAttribute('class', 'input-group')
     divText.appendChild(span.cloneNode(true));
-    divText.appendChild(input.cloneNode(true));
+    divText.appendChild(document.createElement('textarea'));
     divText.firstChild.innerHTML = 'Descrição'
-    divText.lastChild.type = null;
+    divText.lastChild.setAttribute('class', 'form-control');
     divText.lastChild.name = 'descricao';
+    divText.lastChild.value = data[4];
+
+    // input para enviar o ID da tarefa.
+    divText.appendChild(document.createElement('input'));
+    divText.lastChild.name = 'id';
+    divText.lastChild.type = 'text';
+    divText.lastChild.placeholder = 'ID';
+    divText.lastChild.style.display = 'none';
+    divText.lastChild.value = data[3];
 
     form.appendChild(divText);
+    form.appendChild(document.createElement('hr'))
+}
+
+function removeTextSpacing(str) {
+    let newStr;
+
+    newStr = str.slice(13, str.length - 10)
+    return newStr;
 }
 
 /**
@@ -121,6 +142,63 @@ document.getElementById("edit").onclick = function() {
         document.getElementById("modalEditMessage").style.display = 'block';
     } else {
         document.getElementById("modalEditContent").style.display = 'block';
+        
+        let Alltable_rows = document.getElementsByTagName('tr');
+        let trArray = [];
+        let descArray = [];
+
+        for(let i = 1; i < Alltable_rows.length; i++){
+            if(i % 2 === 0) {
+                descArray.push(
+                    removeTextSpacing(Alltable_rows[i].
+                        children[0].innerText)
+                );
+            } else {
+                trArray.push(Alltable_rows[i]);
+
+                if(!Alltable_rows[i].children[0].children[0].children[0].checked)
+                    i++;
+            }
+        }
+
+        console.log(trArray)
+        console.log(descArray)
+
+        let TdData, TrData = [];
+        for(let i = 0; i < trArray.length; i++) {
+            TdData = [];
+
+            if(trArray[i].children[0].children[0].children[0].checked) {
+                for(let j = 2; j < trArray[i].children.length; j++) {
+                    TdData.push(trArray[i].children[j].innerText);
+                }
+                TdData.push(descArray[0]);
+                descArray.shift();
+                TrData.push(TdData);
+            }
+        }
+
+        console.log()
+
+        for(let i = 0; i < TrData.length; i++) {
+            TrData[i][3] = TrData[i][3].slice(13, 49);
+        }
+
+        console.log(TrData);
+
+        for(let i = 0; i < TrData.length; i++) {
+            createEditForm(TrData[i]);
+        }
+
         document.getElementById("modalEditMessage").style.display = 'none';
     }
+}
+
+function removeEditContent() {
+    modalEditBody = document.getElementById("modalEditContent");
+
+    while (modalEditBody.firstChild) {
+        modalEditBody.removeChild(modalEditBody.firstChild);
+    }
+
 }
