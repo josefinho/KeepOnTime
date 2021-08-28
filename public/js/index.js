@@ -202,3 +202,17 @@ function removeEditContent() {
     }
 
 }
+
+
+function expand_subtext(id){
+    
+    let status = document.getElementById(id).getAttribute("class")
+
+
+        if (status == "collapse"){
+            document.getElementById(id).setAttribute("class" , "expand")
+        }else{
+            document.getElementById(id).setAttribute("class" , "collapse")
+        }
+
+}
