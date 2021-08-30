@@ -32,6 +32,9 @@
                         <a class="nav-link text-white" href="#" data-bs-toggle="modal" id="Novocaderno"
                             data-bs-target="#caderno">Novo Caderno</a>
                     </li>
+                    <a class="nav-link text-white" href="#" data-bs-toggle="modal" id="editarcaderno"
+                        data-bs-target="#editcaderno">Editar Caderno</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -41,9 +44,19 @@
             <div class="col-sm-3">
 
                 <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        Cadernos
-                    </button>
+                    <div class="row">
+                        <div class="col">Caderno</div>
+                        <div class="col">
+                            <img src="/node_modules/bootstrap-icons/icons/pencil.svg" alt="erro">
+                            
+                        </div>
+                        <div class="col">
+                            
+                        </div>
+                        <div class="col">
+
+                        </div>
+                    </div>
                     <button type="button" class="list-group-item list-group-item-action">Caderno 1</button>
                     <button type="button" class="list-group-item list-group-item-action">Caderno 2</button>
                     <button type="button" class="list-group-item list-group-item-action">Caderno 3</button>
@@ -153,40 +166,66 @@
 
                         </div>
                     </div>
-
                 </div>
                 <!--Novo Caderno-->
                 <div class="modal fade" id="caderno" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content p-3">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Titulo</span>
-                            <input name="titulo" type="text" class="form-control"
-                                placeholder="Título da tarefa" aria-label="Username"
-                                aria-describedby="basic-addon1">
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content p-3">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Criar Novo Caderno</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Titulo</span>
+                                <input name="titulo" type="text" class="form-control" placeholder="Título da tarefa"
+                                    aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">Descrição</span>
+                                <textarea name="descricao" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <span class="input-group-text">Descrição</span>
-                            <textarea name="descricao" class="form-control"
-                                aria-label="With textarea"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Sair</button>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+                <!--Editar Caderno-->
+                <div class="modal fade" id="editcaderno" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editarLabel">Editar tarefa</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    onclick="removeEditContent()"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="modalEditMessage">
+                                    Nenhuma tarefa selecionada.
+                                </div>
+                                <form id="modalEditContent" method="POST" action="/edit">
+
+                                </form>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Sair</button>
+                                    <button type="submit" class="btn btn-primary" onclick="submitForm()">Salvar</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-
-
             </div>
-        </div>
 
-    </div>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/index.js"></script>
+        </div>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/index.js"></script>
 
 </body>
 
