@@ -37,12 +37,7 @@ async function criarTarefa(tarefa) {
  * @param {Object} tarefaEditada 
  */
 async function editarTarefa(id_tarefa, tarefaEditada) {
-    const tarefa = await Tarefa.findByPk(id_tarefa);
-    Object.keys(tarefaEditada).forEach(function(coluna) {
-        if (tarefa.hasOwnProperty(coluna))
-            tarefa[coluna] = tarefaEditada[coluna];
-    });
-    tarefa.save();
+    Tarefa.update(tarefaEditada, { where: { id: id_tarefa }})
 }
 
 /**

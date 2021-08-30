@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const { pegarListaTarefas, removerTarefa } = require('./tarefas-repos')
+const { pegarListaTarefas, removerTarefa, editarTarefa } = require('./tarefas-repos')
 const { criarTarefa } = require('./tarefas-repos')
 const { syncDatabase, Tarefa } = require('./schema')
 
@@ -31,9 +31,8 @@ app.post('/', (req, res) => {
 })
 
 app.post('/edit', (req, res) => {
-  console.log('DADOS ATUALIZADOS', req.body, req.body.id)
-
-  res.redirect('/');
+  editarTarefa(req.body.id, req.body);
+  res.redirect('/')
 });
 
 app.post('/delete', (req, res) => {
