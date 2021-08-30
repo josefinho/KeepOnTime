@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-const { pegarListaTarefas } = require('./tarefas-repos')
+const { pegarListaTarefas, removerTarefa } = require('./tarefas-repos')
 const { criarTarefa } = require('./tarefas-repos')
-const { syncDatabase } = require('./schema')
+const { syncDatabase, Tarefa } = require('./schema')
 
 
 const port = 3000
@@ -32,10 +32,24 @@ app.post('/', (req, res) => {
 })
 
 app.post('/edit', (req, res) => {
-  console.log('DADOS ATUALIZADOS', req.body)
+  console.log('DADOS ATUALIZADOS', req.body, req.body.id)
 
   res.redirect('/');
 });
+
+app.post('/delete', (req, res) => {
+  let dataArr = req.body.id;
+
+  if(typeof dataArr === 'object') {
+    for(let i = 0; i < dataArr.length; i++) {
+      removerTarefa(dataArr[i]);
+    }
+  } else {
+    removerTarefa(dataArr);
+  }
+
+  res.redirect('/');
+})
 
 app.listen(port, () => {
   console.log(`Rodando em http://localhost:${port}`)

@@ -222,3 +222,61 @@ function submitForm() {
     let form = document.getElementById('modalEditContent');
     form.submit();
 }
+
+function getCheckedsTr() {
+    let checkeds = getAllCheckeds();
+    let checkedsTr = [];
+
+    for(let i = 0; i < checkeds.length; i++) {
+        checkedsTr.push(
+            checkeds[i].parentNode
+                       .parentNode
+                       .parentNode
+        );
+    }
+
+    return checkedsTr;
+}
+
+// Recebe um vetor de <tr> (tarefas) e retorna um vetor com seus id's.
+function getTrId(tr_arr) {
+    let arr = [];
+
+    for(let i = 0; i < tr_arr.length; i++) {
+        arr[i] = tr_arr[i].getAttribute('href');
+    }
+
+    return arr;
+}
+
+/**
+ * Submitta um formulário contendo os ID's das tarefas a serem deletadas.
+ */
+document.getElementById('delete')
+.onclick = function() {
+
+    let checkedsTr = getCheckedsTr();
+    let checkedsTrId = getTrId(checkedsTr);
+
+    let form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/delete';
+    form.setAttribute('class', 'd-none');
+
+    let input;
+    for(let i = 0; i < checkedsTrId.length; i++) {
+        input = document.createElement('input');
+        input.name = 'id';
+        input.type = 'text';
+        input.value = checkedsTrId[i];
+
+        form.appendChild(input);
+    }
+
+    document.getElementsByTagName('body')[0]
+            .appendChild(form);
+            
+    form.submit();
+    console.log(form)
+
+}
