@@ -17,7 +17,8 @@ const ModeloTarefa = {
         allowNull: false
     },
     descricao: { type: Sequelize.TEXT },
-    prazo: { type: Sequelize.DATE },
+    prazo: { type: Sequelize.TEXT },
+    hora: { type: Sequelize.TEXT},
     status: { type: Sequelize.BOOLEAN },
     //    cor_rgb: { type: Sequelize.STRING },
     //    repete_em_horas: { type: Sequelize.INTEGER },

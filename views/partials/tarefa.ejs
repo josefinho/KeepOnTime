@@ -1,20 +1,26 @@
 <% tarefas.forEach((tarefa)=> { %>
-    <tr data-bs-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <tr data-bs-toggle="collapse" href="<%= tarefa.id %>" aria-expanded="false" aria-controls="collapseExample" onclick="expand_subtext(this.getAttribute('href'))">
         <td>
             <div class="mb-1 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1"></label>
             </div>
         </td>
-        <td>TR</td>
+        <td class="d-none">TR</td>
         <td>
             <%= tarefa.titulo %>
         </td>
         <td>
             <%= tarefa.prazo %>
         </td>
+        <td>
+            <%= tarefa.hora %>
+        </td>
+        <td class="d-none">
+            <%= tarefa.id %>
+        </td>
     </tr>
-    <tr class="collapse" id="collapseExample">
+    <tr class="collapse" id="<%= tarefa.id %>">
         <td colspan="5">
             <%= tarefa.descricao %>
         </td>

@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-const fs = require('fs')
-const { pegarListaTarefas } = require('./tarefas-repos')
-const { syncDatabase } = require('./schema')
+const { pegarListaTarefas, removerTarefa } = require('./tarefas-repos')
+const { criarTarefa } = require('./tarefas-repos')
+const { syncDatabase, Tarefa } = require('./schema')
 
 
 const port = 3000
@@ -19,23 +19,35 @@ app.get('/', async (req, res) => {
   listaTarefas.forEach(element => {
     tarefas.push(element);
   });
+
   res.render('index', {
     tarefas: tarefas
   })
 })
 
 app.post('/', (req, res) => {
-  tarefas.push(req.body)
-
+  criarTarefa(req.body)
   res.redirect('/')
+})
 
-setTimeout(() => {
-  fs.writeFile('tarefas.json', JSON.stringify(tarefas, null, 2), (err) => {
-    if (err) throw err;
-    console.log('Data written to file');
-  });
-}, 1000)
+app.post('/edit', (req, res) => {
+  console.log('DADOS ATUALIZADOS', req.body, req.body.id)
 
+  res.redirect('/');
+});
+
+app.post('/delete', (req, res) => {
+  let dataArr = req.body.id;
+
+  if(typeof dataArr === 'object') {
+    for(let i = 0; i < dataArr.length; i++) {
+      removerTarefa(dataArr[i]);
+    }
+  } else {
+    removerTarefa(dataArr);
+  }
+
+  res.redirect('/');
 })
 
 app.listen(port, () => {
