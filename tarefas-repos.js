@@ -21,7 +21,6 @@ function fecharConexao() {}
  */
 async function criarTarefa(tarefa) {
     const novaTarefa = await Tarefa.create({
-        id: tarefa.id,
         titulo: tarefa.titulo,
         prazo: tarefa.prazo,
         hora: tarefa.hora,

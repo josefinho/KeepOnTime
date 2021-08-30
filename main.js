@@ -9,7 +9,6 @@ const port = 3000
 
 syncDatabase();
 
-
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'));
