@@ -280,3 +280,175 @@ document.getElementById('delete')
     console.log(form)
 
 }
+
+/**
+ * Recebe uma string e uma substring.
+ * 
+ * Remove a substring dessa string, caso exista, e retorna a string
+ * modificada. Caso a substring não exista, retorna 0;
+ */
+function removeSubString(str, substr) {
+    let subStrBegin = str.indexOf(substr);
+    let subStrEnd = subStrBegin + substr.length;
+
+    if(subStrBegin !== -1) {
+        let newStr = '', i = 0;
+
+        while(i < str.length) {
+            if(i >= subStrBegin && i <= subStrEnd) {
+                i++;
+                continue
+            }
+
+            newStr = newStr + str[i];
+            i++;
+        }
+
+        return newStr;
+    }
+
+    return 0;
+}
+
+function setLiActive() {
+    let liCadernoArr = document
+                        .getElementById('caderno-itens')
+                        .children;
+
+    for(let i = 0; i < liCadernoArr.length; i++) {
+        liCadernoArr[i].onclick = function() {
+            let currentClassValue = this.getAttribute('class');
+            let isActived = currentClassValue.indexOf(' active');
+
+            if(isActived === -1) {
+                this.setAttribute('class', currentClassValue + ' active');
+            } else {
+                this.setAttribute(
+                    'class', 
+                    removeSubString(currentClassValue, ' active')
+                    );
+            }
+        }
+    }
+}
+
+setLiActive();
+
+/**
+ * Retorna um vetor com as tarefas (tags <a>)
+ * ativadas (em azul).
+ */
+function getActivedCadernos() {
+    let allCadernoItens = document
+                            .getElementById('caderno-itens')
+                            .children;
+    let arr = [], isActived;
+    for(let i = 0; i < allCadernoItens.length; i++) {
+        isActived = allCadernoItens[i].getAttribute('class')
+                    .indexOf(' active');
+
+        if(isActived === -1)
+            continue;
+        else
+            arr.push(allCadernoItens[i]);
+    }
+
+    return arr;
+}
+
+/**
+ * Cria e submitta um formulário enviando os
+ * ID's dos cadernos a serem deletados.
+ */
+document.getElementById('deletarCaderno')
+.onclick = function() {
+    let activedCadernos = getActivedCadernos();
+    let form = document.createElement('form');
+    form.method = "POST";
+    form.action = "/delete-caderno"
+
+    let input;
+    for(let i = 0; i < activedCadernos.length; i++) {
+        input = document.createElement('input')
+        input.name = "id";
+        input.value = activedCadernos[i].id;
+
+        form.appendChild(input);
+    }
+
+    form.style.display = 'none';
+    document.getElementsByTagName('body')[0].
+        appendChild(form);
+    form.submit();
+}
+
+/**
+ * Retorna um objeto correspondente ao formulário para edição de UM caderno.
+ * Não retorna literalmente uma tag <form>, mas sim uma <div> contendo <input>s.
+ */
+function createCadernoEditForm() {
+    let div = document.createElement('div'),
+        span = document.createElement('span'),
+        input = document.createElement('input'),
+        textArea = document.createElement('textarea'),
+        mainDiv = document.createElement('div'),
+        idNone = document.createElement('input'),
+        hr = document.createElement('hr');
+    
+    let divText, spanText;
+    
+    div.setAttribute('class', 'input-group mb-3');
+
+    span.setAttribute('class', 'input-group-text');
+    span.id = 'basic-addon1';
+    span.innerHTML = 'Título';
+
+    input.setAttribute('class', 'form-control');
+    input.name = 'nome';
+    input.type = 'text';
+    input.placeholder = 'Título do caderno';
+    
+    div.appendChild(span);
+    div.appendChild(input);
+
+    divText = div.cloneNode(false);
+    spanText = span.cloneNode(false)
+    spanText.innerHTML = "Descrição"
+
+
+    divText.appendChild(spanText);
+    textArea.setAttribute('class', 'form-control')
+    textArea.name = 'descricao';
+    divText.appendChild(textArea)
+
+    idNone = document.createElement('input');
+    idNone.name = 'id'
+   // idNone.style.display = 'none'
+    mainDiv.append(div, divText, idNone, hr);
+
+    return mainDiv;
+}
+
+document.getElementById('editarcaderno')
+.onclick = function() {
+    let activeds = getActivedCadernos();
+    form = document.getElementById('formEditCaderno');
+
+    if(activeds.length === 0) {
+        document.getElementById('nenhumCadernoSelecionado')
+            .style.display = 'block';
+    } else {
+        document.getElementById('nenhumCadernoSelecionado')
+            .style.display = 'none';
+    }
+
+    let div;
+    for(let i = 0; i < activeds.length; i++) {
+        div = createCadernoEditForm();
+
+        div.firstChild.lastChild.value = activeds[i].innerHTML;
+        div.children[1].lastChild.value = 'teste'
+        div.children[2].value = activeds[i].id;
+        form.appendChild(div);
+    }
+}

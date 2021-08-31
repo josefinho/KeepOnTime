@@ -28,13 +28,6 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="#" id="delete">Excluir</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link text-white" href="#" data-bs-toggle="modal" id="Novocaderno"
-                            data-bs-target="#caderno">Novo Caderno</a>
-                    </li>
-                    <a class="nav-link text-white" href="#" data-bs-toggle="modal" id="editarcaderno"
-                        data-bs-target="#editcaderno">Editar Caderno</a>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -45,19 +38,18 @@
                 <div class="bg-light text-white d-inline-flex w-100 rounded p-1">
                     <h5 class="h5 text-dark">Cadernos</h5>
                     <div class="d-flex justify-content-end w-75">
-                        <a href="#"><img src="img/plus-lg.svg"></a>
-                        <a href="#"><img src="img/pencil.svg"></a>
-                        <a href="#"><img src="img/trash2.svg"></a>    
+                        <a href="#" data-bs-toggle="modal" id="Novocaderno"
+                        data-bs-target="#caderno"><img src="img/plus-lg.svg"></a>
+                        <a href="#" data-bs-toggle="modal" id="editarcaderno"
+                        data-bs-target="#editcaderno"><img src="img/pencil.svg"></a>
+                        <a href="#" id="deletarCaderno"><img src="img/trash2.svg"></a>    
                     </div>
 
                 </div>
                
-                <div class="list-group ">
-                    <button type="button" class="list-group-item list-group-item-action">Caderno 1</button>
-                    <button type="button" class="list-group-item list-group-item-action">Caderno 2</button>
-                    <button type="button" class="list-group-item list-group-item-action">Caderno 3</button>
-                    <button type="button" class="list-group-item list-group-item-action">Caderno 4</button>
-                </div>
+                <ul id="caderno-itens" class="list-group ">
+                    <%- include('partials/caderno.ejs') %>
+                </ul>
 
             </div>
             <div class="col-sm-9">
@@ -173,19 +165,21 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">Titulo</span>
-                                <input name="titulo" type="text" class="form-control" placeholder="Título da tarefa"
-                                    aria-label="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-text">Descrição</span>
-                                <textarea name="descricao" class="form-control" aria-label="With textarea"></textarea>
-                            </div>
+                            <form method="POST" action="create-caderno">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Titulo</span>
+                                    <input name="nome" type="text" class="form-control" placeholder="Título do caderno"
+                                        aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text">Descrição</span>
+                                    <textarea name="descricao" class="form-control" aria-label="With textarea"></textarea>
+                                </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -195,15 +189,15 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editarLabel">Editar tarefa</h5>
+                                <h5 class="modal-title" id="editarLabel">Editar caderno</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     onclick="removeEditContent()"></button>
                             </div>
                             <div class="modal-body">
-                                <div id="modalEditMessage">
-                                    Nenhuma tarefa selecionada.
+                                <div id="nenhumCadernoSelecionado">
+                                    Nenhum caderno selecionado.
                                 </div>
-                                <form id="modalEditContent" method="POST" action="/edit">
+                                <form id="formEditCaderno" method="POST" action="/edit-caderno">
 
                                 </form>
                                 <div class="modal-footer">
